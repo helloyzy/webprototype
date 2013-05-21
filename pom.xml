@@ -6,11 +6,10 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>webprototype</name>
-	<build>
-		<finalName>webprototype</finalName>
-	</build>
 	<properties>
+		<spring-version>3.2.2.RELEASE</spring-version>
 		<java-version>1.6</java-version>
+		<org-codehaus-jackson-version>1.9.12</org-codehaus-jackson-version>
 	</properties>
 	<description>For quickly setting up a web application making use of Spring and Hibernate</description>
 	<repositories>
@@ -30,12 +29,35 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>3.2.2.RELEASE</version>
+			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>3.2.2.RELEASE</version>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>${org-codehaus-jackson-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${org-codehaus-jackson-version}</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<finalName>webprototype</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
