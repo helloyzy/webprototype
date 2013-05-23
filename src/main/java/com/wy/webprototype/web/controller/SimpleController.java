@@ -25,4 +25,14 @@ public class SimpleController {
 		return user;
 	}
 	
+	@RequestMapping(value = "/testInternalVR", method = RequestMethod.GET)
+	public String testInternalViewResolvers() {
+		return "testInternalVR";
+	}
+	
+	@RequestMapping(value = "/testRSVR", method = RequestMethod.GET)
+	public String testRSViewResolvers() {
+		return "testRSVR";
+	}
+	
 }

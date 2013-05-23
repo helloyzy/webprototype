@@ -14,7 +14,7 @@ xmlns:tx="http://www.springframework.org/schema/tx"
 	<context:component-scan base-package="com.wy.webprototype.web.controller" />
 	
 	<beans:bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<beans:property name="messageConverters">
 			<beans:list>
 				<beans:ref bean="mappingJacksonHttpMessageConverter" />
@@ -27,8 +27,25 @@ xmlns:tx="http://www.springframework.org/schema/tx"
 		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
 		<beans:property name="supportedMediaTypes">
 			<beans:list>
+				<!-- Response will be returned with this MIME -->
 				<beans:value>application/json;charset=UTF-8</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
+	
+	<!-- No need to define controllers, direct dispatch. Note:view-name will be resolved by view resolvers -->
+	<view-controller path="/controllers/directDispatch" view-name="testInternalVR"/>
+	<!-- View resolvers, if configured multiple resolvers, need to specify order.  -->
+	<beans:bean id="rsViewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<beans:property name="basename" value="spring-views" />
+		<beans:property name="order" value="1" />
+	</beans:bean>
+	<!-- InternalResouceViewResolver should be with the highest order value (to be used as the last resolver) -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
+	</beans:bean>
+	
 </beans:beans>
