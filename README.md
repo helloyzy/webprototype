@@ -13,3 +13,7 @@ For quickly setting up a web application making use of Spring and Hibernate.
 (1) the urlmapping defined in the controller(annotated way) is relative to the url-pattern defined in the web.xml 
 for the servlet. E.g. if you define url-pattern as /controller/* and the urlmapping as /simple/helloworld, 
 then you should access [host]/controller/simple/helloworld.
+
+### view resolvers
+
+(1) can have multiple view resolvers and its priority can be defined through "order"
