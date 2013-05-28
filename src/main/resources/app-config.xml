@@ -48,4 +48,6 @@ xmlns:tx="http://www.springframework.org/schema/tx"
 		<beans:property name="order" value="2" />
 	</beans:bean>
 	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
 </beans:beans>

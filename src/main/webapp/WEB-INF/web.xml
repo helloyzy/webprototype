@@ -5,10 +5,14 @@
 <web-app>
 	<display-name>web prototype application</display-name>
 	<!-- Global context -->
-	<!-- <context-param>
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/common-config.xml</param-value>
-	</context-param>  -->
+		<param-value>classpath:common-config.xml</param-value>
+	</context-param>
+	<!-- The listener to load the global context -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 	<!-- Spring dispatch servlet -->
 	<servlet>
 		<servlet-name>applicationServlet</servlet-name>

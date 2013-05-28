@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+	<!-- datasource -->
+	<context:property-placeholder location="classpath:db.properties" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<!-- Connection Info -->
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+
+		<!-- Connection Pooling Info -->
+		<property name="maxIdle" value="${dbcp.maxIdle}" />
+		<property name="maxActive" value="${dbcp.maxActive}" />
+		<property name="defaultAutoCommit" value="true" />
+		<property name="timeBetweenEvictionRunsMillis"
+			value="3600000" />
+		<property name="minEvictableIdleTimeMillis"
+			value="3600000" />
+	</bean>
+	
+	<!-- Hibernate support -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.wy.webprototype.model" />
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.HSQLDialect
+				<!-- hibernate.current_session_context_class=thread  -->
+				hibernate.current_session_context_class=org.springframework.orm.hibernate4.SpringSessionContext
+				hibernate.show_sql=true
+				hibernate.format_sql=true
+				<!-- use create mode for the first time : hibernate.hbm2ddl.auto=create  -->
+				hibernate.hbm2ddl.auto=update
+				hibernate.cache.region.factory_class = org.hibernate.cache.internal.NoCachingRegionFactory
+				<!-- hibernate.cache.provider_class=org.hibernate.cache.NoCacheProvider  -->
+			</value>
+		</property>
+	</bean>
+	
+	<!-- Does not need this for Hibernate 4
+	<bean id="hibernateTemplate"
+		class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>  -->
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+</beans>
