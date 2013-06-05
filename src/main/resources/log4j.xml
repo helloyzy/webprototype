@@ -23,6 +23,11 @@
 		<level value="info" />
 		<appender-ref ref="console" />
 	</logger>
+	
+	<logger name="com.wy.webprototype">
+		<level value="info" />
+		<appender-ref ref="console" />
+	</logger>
 
 	<!-- Root Logger -->
 	<root>

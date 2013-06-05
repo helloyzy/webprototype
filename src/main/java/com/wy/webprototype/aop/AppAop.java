@@ -1,9 +1,14 @@
 package com.wy.webprototype.aop;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class AppAop {
 	
+	private Logger logger = LoggerFactory.getLogger(AppAop.class);
+	
 	public void doBefore() {  
-		System.out.println("log Begining method: ");
+		logger.info("Entering method... ");
 	}  
 	
 	/**
