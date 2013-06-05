@@ -34,16 +34,29 @@ public class SimpleController {
 		return user;
 	}
 	
+	/**
+	 * View resolvers test - internal view resolver
+	 * @return String
+	 */
 	@RequestMapping(value = "/testInternalVR", method = RequestMethod.GET)
 	public String testInternalViewResolvers() {
 		return "testInternalVR";
 	}
 	
+	/**
+	 * View resolvers test - resource view resolver
+	 * @return String
+	 */
 	@RequestMapping(value = "/testRSVR", method = RequestMethod.GET)
 	public String testRSViewResolvers() {
 		return "testRSVR";
 	}
 	
+	/**
+	 * Hibernate test - add user in a transaction
+	 * @param userId
+	 * @return String
+	 */
 	@RequestMapping(value = "/testAddUser", method = RequestMethod.GET)
 	@ResponseBody
 	@Transactional
@@ -51,16 +64,23 @@ public class SimpleController {
 		User user = new User();
 		user.setUserId(userId);
 		user.setUserName("test" + userId);
+		// get the current session and thus make @Transactional work
 		Session session = sessionFactory.getCurrentSession();
 		session.save(user);
 		return "success";
 	}
 	
+	/**
+	 * Hibernate test - query user in a new session
+	 * @param userId
+	 * @return String
+	 */
 	@RequestMapping(value = "/testQueryUser", method = RequestMethod.GET)
 	@ResponseBody
 	public String testQueryUser(@RequestParam(value="userId",required = true) Long userId) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.openSession(); // open a new session
 		User user = (User)session.get(User.class, userId);
+		session.close();
 		if (user != null) {
 			return user.getUserName();
 		} else {

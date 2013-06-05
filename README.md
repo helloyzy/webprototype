@@ -18,6 +18,11 @@ then you should access [host]/controller/simple/helloworld.
 
 (1) can have multiple view resolvers and its priority can be defined through "order"
 
+### transaction support
+
+(1) use sessionFactory.getCurrentSession() to make @Transactional label work (sessionFactory.openSession() will open a new 
+session and thus does not belong to current transaction scope)
+
 ## Integration with Hibernate 4
 
 Refer to this article: http://hi.baidu.com/austincao/item/fc9907da3d854e44fa576861
