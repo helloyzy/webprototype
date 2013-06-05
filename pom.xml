@@ -11,6 +11,7 @@
 		<spring-version>3.2.2.RELEASE</spring-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<org-codehaus-jackson-version>1.9.12</org-codehaus-jackson-version>
+		<aspectj.version>1.6.11</aspectj.version>
 	</properties>
 	<description>For quickly setting up a web application making use of Spring and Hibernate</description>
 	<repositories>
@@ -49,6 +50,28 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<!-- cglib - AOP runtime implementation (based on class proxy), can also use aspectj -->
+		<!-- <dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.0</version>
+		</dependency>  -->
+		<dependency>
+      		<groupId>org.aspectj</groupId>
+      		<artifactId>aspectjrt</artifactId>
+      		<version>${aspectj.version}</version>
+	    </dependency>
+	    <dependency>
+      		<groupId>org.aspectj</groupId>
+      		<artifactId>aspectjweaver</artifactId>
+     		<version>${aspectj.version}</version>
+	    </dependency>
+		<!-- jackson - json support -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-core-asl</artifactId>
