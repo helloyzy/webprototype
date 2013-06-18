@@ -23,7 +23,9 @@ then you should access [host]/controller/simple/helloworld.
 (1) use sessionFactory.getCurrentSession() to make @Transactional label work (sessionFactory.openSession() will open a new 
 session and thus does not belong to current transaction scope)
 
-## Integration with Hibernate 4
+## Integration with Hibernate
+
+### Integration with Hibernate 4
 
 Refer to this article: http://hi.baidu.com/austincao/item/fc9907da3d854e44fa576861
 
@@ -35,3 +37,9 @@ org.springframework.orm.hibernate4.LocalSessionFactoryBean
 (3) Does not support HibernateTemplate, need to get session from SessionFactory
 
 (4) Modify hibernate.current_session_context_class from thread to org.springframework.orm.hibernate4.SpringSessionContext
+
+### A word on the NonUniqueObjectException
+
+(1) open a new session; trying loading a model object (assuming its primary key is PK)
+(2) create(new) another model object, set its primary key as PK and make some modifications  
+(3) save the newly created object with the same session. The NonUniqueObjectException will occur
