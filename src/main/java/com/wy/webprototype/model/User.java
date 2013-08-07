@@ -16,6 +16,13 @@ public class User {
 
 	@Column(name="USER_NAME")
 	private String userName;
+	
+	public User() {}
+	
+	public User(long userId, String userName) {
+		this.userId = userId;
+		this.userName = userName;
+	}
 
 	public long getUserId() {
 		return userId;
