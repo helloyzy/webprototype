@@ -43,3 +43,9 @@ org.springframework.orm.hibernate4.LocalSessionFactoryBean
 (1) open a new session; trying loading a model object (assuming its primary key is PK)
 (2) create(new) another model object, set its primary key as PK and make some modifications  
 (3) save the newly created object with the same session. The NonUniqueObjectException will occur
+
+## Integration with Spring data JPA
+
+(1) using jpa:repository to define the Dao package to scan (refer to common-db-jpa-config.xml); Proxy classes will automatically be generated for 
+interfaces inside the package which extend Repository<T, Serializable> 
+(2) need to use JPA entityManagerFactory (not sessionFactory)
