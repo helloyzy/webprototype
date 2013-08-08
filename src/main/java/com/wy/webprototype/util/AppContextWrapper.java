@@ -1,6 +1,9 @@
 package com.wy.webprototype.util;
 
-import static com.wy.webprototype.util.ComLogger.*;
+import static com.wy.webprototype.util.ComLogger.error;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -42,6 +45,14 @@ public class AppContextWrapper implements ApplicationContextAware {
 			error(e);
 			return null;
 		}
+	}
+	
+	public static EntityManager getEntityMgr() {
+		EntityManagerFactory factory = get(EntityManagerFactory.class);
+		if (factory != null) {
+			return factory.createEntityManager();
+		}
+		return null;
 	}
 
 }
