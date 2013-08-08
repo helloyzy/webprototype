@@ -4,14 +4,19 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 	<config>
-		<aspect id="controllerAspect" ref="aspectBean">
+		<aspect id="controllerAspect" ref="aopBean">
 			<!-- configure all methods of all classes under controller package -->
-			<pointcut id="controllerPointcut"
-				expression="execution(* com.wy.webprototype.web.controller.*.*(..))" />
-			<before pointcut-ref="controllerPointcut" method="doBefore" />
+			<pointcut id="pt1" expression="execution(* com.wy.webprototype.web.controller.*.*(..))" />
+			<!-- configure public methods with suffix "String" of SimpleController -->
+			<pointcut id="pt2" expression="execution(public * com.wy.webprototype.web.controller.SimpleController.*String(..))" />
+			<before pointcut-ref="pt1" method="doBefore" />
+			<around pointcut-ref="pt1" method="doAround" />
+			<after pointcut-ref="pt1" method="doAfter" />
 		</aspect>
 	</config>
 
-	<beans:bean id="aspectBean" class="com.wy.webprototype.aop.AppAop" />
+	<beans:bean id="aopBean" class="com.wy.webprototype.aop.AppAop">
+		<beans:property name="isMonitorRunningTime" value="true" />
+	</beans:bean>
 
 </beans:beans>
