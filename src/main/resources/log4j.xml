@@ -18,8 +18,9 @@
 		</layout>
 	</appender>
 
-	<!-- 3rdparty Loggers -->
+	<!-- 3rdparty Loggers, the logger will also have appenders defined from Root (with additivity="true")   -->
 	<logger name="org.springframework" additivity="true">
+		<!-- level set here will override root's level -->
 		<level value="info" />
 		<appender-ref ref="console" />
 	</logger>
@@ -32,6 +33,7 @@
 	<!-- Root Logger -->
 	<root>
 		<priority value="info" />
+		<!-- <appender-ref ref="console" />  -->
 	</root>
 
 </log4j:configuration>

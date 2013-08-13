@@ -49,3 +49,7 @@ org.springframework.orm.hibernate4.LocalSessionFactoryBean
 (1) using jpa:repository to define the Dao package to scan (refer to common-db-jpa-config.xml); Proxy classes will automatically be generated for 
 interfaces inside the package which extend Repository<T, Serializable> 
 (2) need to use JPA entityManagerFactory (not sessionFactory)
+
+## Issues and mitigations
+
+(1) Configure the tx (http://www.springframework.org/schema/tx) needs to import spring-orm package.
